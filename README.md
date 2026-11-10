@@ -28,6 +28,8 @@ No database server is needed: SQLite is a file, and it is created automatically 
 
 ## How to run
 
+The repository and the zip do not include the `node_modules` folder; `npm install` recreates it.
+
 ```bash
 # 1. Install dependencies
 npm install
@@ -38,9 +40,11 @@ cp .env.example .env        # Windows PowerShell: Copy-Item .env.example .env
 # 3. (Optional) insert 3 sample tasks
 npm run seed
 
-# 4. Start the server
-npm start
+# 4. Start the dev server (restarts automatically when a file changes)
+npm run dev
 ```
+
+To run the server without auto-restart, use `npm start` instead of `npm run dev`.
 
 The server prints:
 
@@ -55,7 +59,8 @@ Other scripts:
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Start the server and restart it when a file changes |
+| `npm run dev` | Start the dev server; it restarts when a file changes |
+| `npm start` | Start the server without auto-restart |
 | `npm run seed` | Insert sample tasks (only if the table is empty) |
 | `npm test` | Run the automated tests |
 | `npm run test:postman` | Run the Postman collection with Newman (server must be running) |
@@ -436,7 +441,7 @@ All errors go through one error-handling middleware (`src/middleware/errors.js`)
 
 `postman/Tasks-API.postman_collection.json` contains 18 requests that cover every route, including the error cases. Each request has test scripts that check the status code and the response.
 
-1. Start the server: `npm start`
+1. Start the server: `npm run dev`
 2. In Postman: **Import** → select the collection file
 3. Run the requests in order (or use **Run collection**). "Create task" saves the new id in the `taskId` variable used by the later requests.
 
