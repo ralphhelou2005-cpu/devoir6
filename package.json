@@ -1,0 +1,26 @@
+{
+  "name": "tasks-rest-api",
+  "version": "1.0.0",
+  "description": "Assignment 6 - RESTful Tasks API built with Node.js, Express and SQLite",
+  "main": "src/server.js",
+  "private": true,
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test tests/tasks.test.js",
+    "test:postman": "newman run postman/Tasks-API.postman_collection.json"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0"
+  },
+  "devDependencies": {
+    "newman": "^6.2.3",
+    "supertest": "^7.3.2"
+  }
+}

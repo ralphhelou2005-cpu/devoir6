@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# Environment variables (never commit secrets / local config)
+.env
+
+# SQLite database files (created automatically on first run)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+
+# Misc
+*.log
+*.zip
+.DS_Store

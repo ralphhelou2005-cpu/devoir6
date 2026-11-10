@@ -1,0 +1,29 @@
+
+> tasks-rest-api@1.0.0 test
+> node --test tests/tasks.test.js
+
+✔ GET /health returns 200 (59.6326ms)
+✔ POST /tasks creates a task and returns 201 with a Location header (55.0071ms)
+✔ POST /tasks applies defaults for optional fields (9.6555ms)
+✔ POST /tasks returns 400 with one message per invalid field (9.5334ms)
+✔ POST /tasks returns 400 when title is missing (5.4296ms)
+✔ POST /tasks returns 400 for malformed JSON (6.1958ms)
+✔ POST /tasks returns 400 for a missing body or a non-object body (16.7862ms)
+✔ GET /tasks lists tasks and supports filters (21.1058ms)
+✔ GET /tasks returns 400 for an invalid filter (3.8764ms)
+✔ GET /tasks/:id returns the task (9.2151ms)
+✔ GET /tasks/:id returns 404 for a missing task and 400 for a bad id (24.3151ms)
+✔ PUT /tasks/:id replaces the task (10.8454ms)
+✔ PUT /tasks/:id returns 400 for invalid data and 404 for a missing task (15.3608ms)
+✔ PATCH /tasks/:id updates only the given fields (21.393ms)
+✔ DELETE /tasks/:id deletes the task, then returns 404 (16.3123ms)
+✔ unknown routes return a JSON 404 (3.379ms)
+✔ data is persisted in the database file (9.6558ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3337.5806

@@ -1,0 +1,135 @@
+(node:32656) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+newman
+
+Tasks REST API - Assignment 6
+
+→ Health check
+  GET http://localhost:3055/health [200 OK, 250B, 42ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Database is connected
+
+→ Create task
+  POST http://localhost:3055/tasks [201 Created, 476B, 32ms]
+  √  Status code is 201
+  √  Response is JSON
+  √  Created task has an id and the sent title
+  √  Location header points to the new task
+
+→ Create task - validation error (400)
+  POST http://localhost:3055/tasks [400 Bad Request, 601B, 5ms]
+  √  Status code is 400
+  √  Response is JSON
+  √  Error code is VALIDATION_ERROR
+  √  One message per invalid field
+
+→ Create task - malformed JSON (400)
+  POST http://localhost:3055/tasks [400 Bad Request, 297B, 3ms]
+  √  Status code is 400
+  √  Response is JSON
+  √  Error code is INVALID_JSON
+
+→ List all tasks
+  GET http://localhost:3055/tasks [200 OK, 1.07kB, 3ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Returns an array that contains the created task
+
+→ List tasks - filtered
+  GET http://localhost:3055/tasks?status=in_progress&priority=high [200 OK, 688B, 3ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Every task matches the filters
+
+→ List tasks - invalid filter (400)
+  GET http://localhost:3055/tasks?status=unknown [400 Bad Request, 386B, 4ms]
+  √  Status code is 400
+  √  Response is JSON
+  √  Error code is VALIDATION_ERROR
+
+→ Get task by id
+  GET http://localhost:3055/tasks/4 [200 OK, 451B, 3ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Returns the requested task
+
+→ Get task - not found (404)
+  GET http://localhost:3055/tasks/999999 [404 Not Found, 295B, 4ms]
+  √  Status code is 404
+  √  Response is JSON
+  √  Error code is NOT_FOUND
+
+→ Get task - invalid id (400)
+  GET http://localhost:3055/tasks/abc [400 Bad Request, 331B, 3ms]
+  √  Status code is 400
+  √  Response is JSON
+  √  Error code is VALIDATION_ERROR
+
+→ Update task (PUT)
+  PUT http://localhost:3055/tasks/4 [200 OK, 458B, 4ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Task was updated
+
+→ Update task (PUT) - validation error (400)
+  PUT http://localhost:3055/tasks/4 [400 Bad Request, 349B, 2ms]
+  √  Status code is 400
+  √  Response is JSON
+  √  Error code is VALIDATION_ERROR
+
+→ Update task (PUT) - not found (404)
+  PUT http://localhost:3055/tasks/999999 [404 Not Found, 295B, 3ms]
+  √  Status code is 404
+  √  Response is JSON
+  √  Error code is NOT_FOUND
+
+→ Partially update task (PATCH)
+  PATCH http://localhost:3055/tasks/4 [200 OK, 455B, 4ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Only priority changed
+
+→ Delete task
+  DELETE http://localhost:3055/tasks/4 [200 OK, 483B, 4ms]
+  √  Status code is 200
+  √  Response is JSON
+  √  Returns the deleted task
+
+→ Get deleted task (404)
+  GET http://localhost:3055/tasks/4 [404 Not Found, 290B, 4ms]
+  √  Status code is 404
+  √  Response is JSON
+  √  Error code is NOT_FOUND
+
+→ Delete task again (404)
+  DELETE http://localhost:3055/tasks/4 [404 Not Found, 290B, 2ms]
+  √  Status code is 404
+  √  Response is JSON
+  √  Error code is NOT_FOUND
+
+→ Unknown route (404)
+  GET http://localhost:3055/unknown [404 Not Found, 295B, 2ms]
+  √  Status code is 404
+  √  Response is JSON
+  √  Error code is NOT_FOUND
+
+┌─────────────────────────┬──────────────────┬─────────────────┐
+│                         │         executed │          failed │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│              iterations │                1 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│                requests │               18 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│            test-scripts │               18 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│      prerequest-scripts │                0 │               0 │
+├─────────────────────────┼──────────────────┼─────────────────┤
+│              assertions │               56 │               0 │
+├─────────────────────────┴──────────────────┴─────────────────┤
+│ total run duration: 1606ms                                   │
+├──────────────────────────────────────────────────────────────┤
+│ total data received: 3.82kB (approx)                         │
+├──────────────────────────────────────────────────────────────┤
+│ average response time: 7ms [min: 2ms, max: 42ms, s.d.: 10ms] │
+└──────────────────────────────────────────────────────────────┘
